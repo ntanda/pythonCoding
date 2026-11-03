@@ -37,7 +37,7 @@ opo 3 turni validi, count("vittoria") dà 2 e il punteggio è 20.
 """
 
 # Condizione per giocare fino a 10 torni
-while len(storia) < 10:
+while len(storia) < 10:  # ripete finché la lista non ha 10 elementi. Il pareggio non fa	, quindi non conta.
     mossa_umano = input("Fai la tua mossa (sasso, carta, forbisce) : ")
     mossa_umano = mossa_umano.lower().strip() # minuscule o sesìnza spazio
     
@@ -48,59 +48,34 @@ while len(storia) < 10:
     # Regole del gioco che è nel sistema : il computer mostra casualemente, 
     # poi segnale la partita
  
-    mosaa_computer = random.choice(mosse) # il computer mostra casualemente gli elementi di gioco
-    print(f"Tu : {mossa_umano}, | Computer : {mosaa_computer} ")
+    mossa_computer = random.choice(mosse) # il computer mostra casualemente gli elementi di gioco
+    print(f"Tu : {mossa_umano}, | Computer : {mossa_computer} ")
     
-    # Azione del gioco
-    
-
-
+    # Cominciare il gioco 
+    if mossa_umano == mossa_computer :
+        print("Pareggio, si rigioca il turno")
+    elif (mossa_umano == "sasso" and mossa_computer == "forbisce ") or\
+         (mossa_umano == "carta" and mossa_computer == "sasso" ) or\
+         (mossa_umano == "forbisce" and mossa_computer == "carta") :
+        
+        print("Hai vinto questo torno ! ")
+        storia.append("vittoria ")
+    else:
+        
+        print("Il computer ha vinto questo torno")
+        storia.append("sconfitta ")
+        
+        # Punteggio che vuole dire su 10 torni, quanti volte ha vinto?
+        punteggio = storia.count("vittoria ") * 10
+        print("Storia dei turni :", storia )
+        print(f"Tuo punteggio finale è : {punteggio}/100 ")
+        
+        
 """
-Pratica Git and GitHub
-A. Git in local sul computer
-
-1. creo una cartella repository del progetto in local e sapere dove l'ho messo. 
-il nome è pythonCoding e si trova nel Documents
-2. Vado scrivere sul terminal per posizionarmi prima su Documents con cd , 
-poi posizionarmi su pythonCoding cartella progetto
-poi, creo un cartela repository su local con git init -> 
-poi faccio git status per vedere i miei file
-poi, faccio git add mora_cineseio, cioé il nome del file
-poi, faccio git commit -m "commentari" . e posso farlo direttamente nel VS con + e message e commit
-poi, Vedere tutti i commit già nella cronologia: faccio git log --oneline
-
-B. GitHub remote online
-2. creo un cartella repository del progetto online che è questa copia che sta in local
-- vado nel mio account GìtHub ntanda, e creo primo il nuovo repository e la descrizione
-- poi, faccio collegare il repository in local a questo che è online 
-tramite questo commande : git remote add origin https://github.com/ntanda/pythonCoding
-- poi, per Verificare il collegamento se è riuscito tra local e online . git remote -v
-per sapere che il collegamente è andato bene si vede questo fetch e push :
-origin  https://github.com/ntanda/pythonCoding (fetch)
-origin  https://github.com/ntanda/pythonCoding (push)
-
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-Primo push su GitHub
-
-Dobbiamo sapere che il git push invia i commit locali al repository remoto. 
-Ma è solo l'opzione -u che crea questo collegamento tra il branch locale main e 
-il branch remoto origin/main che si fa dal command : git push -u origin
-
-E doppo questa prima configurazione collegata con -u tramite il command : git push -u origin
- che facciamo il primo push del cartella repository local online.
-E per i push successivi basta il command : git push.
-
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-
-
-** Ma prima di fare questo push -u, dobbiamo verificare che il main di GitHUb online corrisponde 
-con main in local, or in local si chiama Head master.
-Cosa fare? Cambiamo il Head master al main con il command : 
-Soluzione: rinominare il branch locale in main, poi rifare il push:
-
-1. git branch -M main
-2. git push -u origin main
-3. git push
-
-
+Non servono né   turno += 1	né vittorie += 1 : la lista tiene il conto da sola.
+continue torna all’inizio del  ciclo quando la mossa non è valida.
 """
+     
+        
+        
+ 
